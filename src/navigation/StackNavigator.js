@@ -1,7 +1,7 @@
 import React from "react";
 import { createNativeStackNavigator } from  '@react-navigation/native-stack';
 
-import { HomeScreen, ProfileScreen, WasteDataListScreen, InputWasteDataScreen } from '../screens'
+import { HomeScreen, ProfileScreen, WasteDataListScreen, InputWasteDataScreen, IncomingTransactionScreen } from '../screens'
 
 const Stack = createNativeStackNavigator();
 
@@ -23,4 +23,13 @@ const WasteStackNavigator = () => {
     );
   }
 
-export { HomeStackNavigator, WasteStackNavigator };
+const InTransactionNavigator = () => {
+    return (
+      <Stack.Navigator screenOptions={{headerShown: false}}>
+        <Stack.Screen name="WasteDataList" component={IncomingTransactionScreen} />
+      </Stack.Navigator>
+    );
+  }
+
+
+export { HomeStackNavigator, WasteStackNavigator, InTransactionNavigator };

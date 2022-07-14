@@ -30,7 +30,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'white', 
     height: 250, 
     padding: 5, 
-    flexDirection: 'column'
+    flexDirection: 'column',
+    marginBottom: 5
   },
   wrapCard: {
     backgroundColor: '#FFFFFF', 

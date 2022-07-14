@@ -3,7 +3,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { HomeScreen, ProfileScreen, WasteDataListScreen, InputWasteDataScreen } from '../screens'
 import CustomSidebarMenu from './SideMenu/SideMenu';
-import { HomeStackNavigator, WasteStackNavigator } from './StackNavigator'
+import { HomeStackNavigator, WasteStackNavigator, InTransactionNavigator } from './StackNavigator'
 
 const Drawer = createDrawerNavigator()
 
@@ -42,7 +42,7 @@ const DrawerNavigation = () => {
                             backgroundColor: '#66CDAA'
                         }
                     }} 
-                    name="Transaksi Masuk" component={ProfileScreen} />
+                    name="Transaksi Masuk" component={InTransactionNavigator} />
                 <Drawer.Screen 
                     options={{
                         // drawerActiveBackgroundColor: 'red',
