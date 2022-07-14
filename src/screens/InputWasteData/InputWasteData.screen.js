@@ -9,10 +9,13 @@ import {
 } from 'react-native'
 import styles from './InputWasteData.style'
 import Icon from 'react-native-vector-icons/AntDesign'
+import Header from '../../components/Header';
 
 const InputWasteData = ({ navigation }) => {
 
   return (
+    <>
+    <Header navigation={navigation} centerTitle="Home" buttonBack={true} />
     <ScrollView> 
         <View style={styles.container}>
             <View style={{
@@ -63,6 +66,15 @@ const InputWasteData = ({ navigation }) => {
                   </Button>
                 </View>
             </View>
+            <View style={{marginBottom: 20}}>
+                <View style={{marginBottom: 12}}>
+                  <Text style={{color: '#2E434D',fontSize: 16,}}>Upload Gambar</Text>
+                </View>
+                <View>
+                  <Button title="Upload">
+                  </Button>
+                </View>
+            </View>
 
             <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
               <View style={{flex: 1}}>
@@ -76,6 +88,7 @@ const InputWasteData = ({ navigation }) => {
             </View>
         </View>
     </ScrollView> 
+              </>
   );
 }
 

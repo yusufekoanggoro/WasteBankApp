@@ -3,6 +3,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { HomeScreen, ProfileScreen, WasteDataListScreen, InputWasteDataScreen } from '../screens'
 import CustomSidebarMenu from './SideMenu/SideMenu';
+import { HomeStackNavigator, WasteStackNavigator } from './StackNavigator'
 
 const Drawer = createDrawerNavigator()
 
@@ -10,9 +11,9 @@ const DrawerNavigation = () => {
     return(
         <NavigationContainer>
             <Drawer.Navigator 
-                initialRouteName="Transaksi Masuk"
+                initialRouteName="Home"
                 drawerContent={(props) => <CustomSidebarMenu {...props} />}
-                screenOptions={{swipeEnabled: false}}
+                screenOptions={{swipeEnabled: false, headerShown: false}}
             >
                 <Drawer.Screen
                     options={{
@@ -20,9 +21,10 @@ const DrawerNavigation = () => {
                         drawerActiveTintColor:  '#000000',
                         headerStyle: {
                             backgroundColor: '#66CDAA'
-                        },
+                        }
                     }} 
-                    name="Home" component={HomeScreen} />
+                    
+                    name="Home" component={HomeStackNavigator} />
                 <Drawer.Screen 
                     options={{
                         // drawerActiveBackgroundColor: 'red',
@@ -31,7 +33,7 @@ const DrawerNavigation = () => {
                             backgroundColor: '#66CDAA'
                         }
                     }} 
-                    name="Data Sampah" component={WasteDataListScreen} />
+                    name="Data Sampah" component={WasteStackNavigator} />
                 <Drawer.Screen 
                     options={{
                         // drawerActiveBackgroundColor: 'red',
@@ -40,7 +42,7 @@ const DrawerNavigation = () => {
                             backgroundColor: '#66CDAA'
                         }
                     }} 
-                    name="Transaksi Masuk" component={InputWasteDataScreen} />
+                    name="Transaksi Masuk" component={ProfileScreen} />
                 <Drawer.Screen 
                     options={{
                         // drawerActiveBackgroundColor: 'red',
@@ -55,4 +57,4 @@ const DrawerNavigation = () => {
     )
 }
 
-export default DrawerNavigation
+export default DrawerNavigation;
