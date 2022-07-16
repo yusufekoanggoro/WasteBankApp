@@ -1,7 +1,6 @@
 import React from "react";
 import { createNativeStackNavigator } from  '@react-navigation/native-stack';
-
-import { HomeScreen, ProfileScreen, WasteDataListScreen, InputWasteDataScreen, IncomingTransactionScreen } from '../screens'
+import { HomeScreen, ProfileScreen, WasteDataListScreen, InputWasteDataScreen, IncomingTransactionScreen, LoginScreen } from '../screens'
 
 const Stack = createNativeStackNavigator();
 
@@ -21,7 +20,7 @@ const WasteStackNavigator = () => {
         <Stack.Screen name="InputWasteData" component={InputWasteDataScreen} />
       </Stack.Navigator>
     );
-  }
+}
 
 const InTransactionNavigator = () => {
     return (
@@ -29,7 +28,18 @@ const InTransactionNavigator = () => {
         <Stack.Screen name="WasteDataList" component={IncomingTransactionScreen} />
       </Stack.Navigator>
     );
-  }
+}
 
+const AuthStackNavigator = ({token}) => {
+  return (
+      <Stack.Navigator initialRouteName="SignIn" screenOptions={{headerShown: false}}>
+        {/* <Stack.Screen name="SignIn"><LoginScreen /></Stack.Screen> */}
+        <Stack.Screen name="SignIn">
+          {props => <LoginScreen {...props} token={token} />}
+        </Stack.Screen>
+        <Stack.Screen name="InputWasteData" component={InputWasteDataScreen} />
+      </Stack.Navigator>
+  );
+}
 
-export { HomeStackNavigator, WasteStackNavigator, InTransactionNavigator };
+export { HomeStackNavigator, WasteStackNavigator, InTransactionNavigator, AuthStackNavigator };

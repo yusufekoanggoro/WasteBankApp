@@ -3,11 +3,13 @@ import ProfileScreen from './Profile/Profile.screen';
 import WasteDataListScreen from './WasteDataList/WasteDataList.screen';
 import InputWasteDataScreen from './InputWasteData/InputWasteData.screen';
 import IncomingTransactionScreen from './IncomingTransaction/IncomingTransaction.screen';
+import LoginScreen from './Login/Login.screen';
 
 export {
   HomeScreen,
   ProfileScreen,
   WasteDataListScreen,
   InputWasteDataScreen,
-  IncomingTransactionScreen
+  IncomingTransactionScreen,
+  LoginScreen
 };

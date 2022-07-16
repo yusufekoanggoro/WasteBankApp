@@ -16,6 +16,8 @@ import {
 } from '@react-navigation/drawer';
 import styles from './SideMenu.style';
 import Icon from 'react-native-vector-icons/AntDesign'
+import { AsyncStorage } from 'react-native';
+
  
 const SideMenu = (props) => {
     const BASE_PATH =
@@ -44,15 +46,22 @@ const SideMenu = (props) => {
                         <Icon name={'user'} size={40} />
                     </View>
                     <View style={{marginTop: 9}}>
-                        <Text style={{fontSize: 15, color: 'white'}}>Bank Sampah</Text>
+                    <Text style={{fontSize: 15, color: 'white'}}>Bank Sampah</Text>
                     </View>
                     <View style={{marginTop: 9}}>
-                        <Text style={{fontSize: 15, color: 'white'}}>PT. Wiwin Mutiara</Text>
+                <Text style={{fontSize: 15, color: 'white'}}>PT. Wiwin Mutiara</Text>
                     </View>
                 </View>
             </View>
             <DrawerContentScrollView {...props}>
                 <DrawerItemList {...props}/>
+                <DrawerItem
+                            label="Logout"
+                            onPress={async () => {
+                                await AsyncStorage.removeItem('tokenUser');
+                                props.token()
+                            }}
+                />
             </DrawerContentScrollView>
         </SafeAreaView>
     );

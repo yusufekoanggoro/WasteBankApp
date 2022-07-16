@@ -7,12 +7,11 @@ import { HomeStackNavigator, WasteStackNavigator, InTransactionNavigator } from 
 
 const Drawer = createDrawerNavigator()
 
-const DrawerNavigation = () => {
+const DrawerNavigation = ({token}) => {
     return(
-        <NavigationContainer>
             <Drawer.Navigator 
                 initialRouteName="Home"
-                drawerContent={(props) => <CustomSidebarMenu {...props} />}
+                drawerContent={(props) => <CustomSidebarMenu {...props} token={token} />}
                 screenOptions={{swipeEnabled: false, headerShown: false}}
             >
                 <Drawer.Screen
@@ -53,7 +52,6 @@ const DrawerNavigation = () => {
                     }} 
                     name="Transaksi Keluar" component={ProfileScreen} />
             </Drawer.Navigator>
-        </NavigationContainer>
     )
 }
 
