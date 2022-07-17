@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import {
   View,
   TouchableOpacity,
@@ -7,11 +7,25 @@ import {
   TextInput,
   Button
 } from 'react-native'
+import * as DocumentPicker from 'react-native-document-picker';
+
 import styles from './InputWasteData.style'
 import Icon from 'react-native-vector-icons/AntDesign'
 import Header from '../../components/Header';
 
 const InputWasteData = ({ navigation }) => {
+  const [fileResponse, setFileResponse] = useState([]);
+
+  const handleDocumentSelection = useCallback(async () => {
+    try {
+      const res = await DocumentPicker.pick({
+        type: [DocumentPicker.types.allFiles]
+      });
+      console.log(res)
+    } catch (err) {
+      console.warn(err);
+    }
+  }, []);
 
   return (
     <>
@@ -72,6 +86,7 @@ const InputWasteData = ({ navigation }) => {
                 </View>
                 <View>
                   <TouchableOpacity
+                    onPress={handleDocumentSelection}
                     style={styles.buttonStyle}
                     activeOpacity={0.5}
                     >
