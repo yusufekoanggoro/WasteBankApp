@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "^4.3.2",
+    "@react-native-picker/picker": "^2.4.2",
     "@react-navigation/bottom-tabs": "^6.3.1",
     "@react-navigation/drawer": "^6.4.2",
     "@react-navigation/native": "^6.0.10",
@@ -20,6 +21,8 @@
     "babel-plugin-transform-inline-environment-variables": "^0.4.4",
     "react": "17.0.2",
     "react-native": "0.68.2",
+    "react-native-date-picker": "^4.2.3",
+    "react-native-document-picker": "^8.1.1",
     "react-native-dotenv": "^3.3.1",
     "react-native-gesture-bottom-sheet": "^1.1.0",
     "react-native-gesture-handler": "^2.5.0",

@@ -28,13 +28,16 @@ const styles = StyleSheet.create({
     height: 60,
     flexDirection: 'row',
     backgroundColor: 'gray',
-    marginTop: 5
+    marginTop: 5,
+    borderRadius: 5
   },
   wrapCardLeft: { 
     width: '30%', 
     justifyContent: 'center', 
     alignItems: 'center', 
     backgroundColor: '#66CDAA',
+    borderTopLeftRadius: 5,
+    borderBottomLeftRadius: 5
   },
   wrapCardRight: { 
     width: '70%', 
