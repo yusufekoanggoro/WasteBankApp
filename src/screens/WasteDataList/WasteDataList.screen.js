@@ -1,29 +1,72 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
-  TouchableOpacity
+  TouchableOpacity,
+  ScrollView
 } from 'react-native'
 import { Text, Card } from '@rneui/themed';
 import styles from './WasteDataList.style'
 import Icon from 'react-native-vector-icons/AntDesign'
+
+import ModalProduct from '../../components/Modal';
 import CardProduct from '../../components/CardProduct';
 import Header from '../../components/Header';
 
 
 const WasteDataList = ({ navigation }) => {
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const dataSampah = [
+    {
+      name: 'Kardus',
+      harga: 2000,
+      url: '',
+    },
+    {
+      name: 'Gelas Plastik',
+      harga: 1200,
+      url: '',
+    },
+    {
+      name: 'Pet',
+      harga: 1500,
+      url: '',
+    },
+    {
+      name: 'Besi',
+      harga: 3500,
+      url: '',
+    },
+  ]
 
   return (
     <View style={styles.container}>
       <Header navigation={navigation} centerTitle="Data Sampah" />
-      <View style={{
-        flex: 1,
-        flexDirection: 'row',
-        flexWrap: 'wrap', 
-      }}>
-        <CardProduct />
-        <CardProduct />
-        <CardProduct />
-      </View>
+
+      <ModalProduct 
+        visible={modalVisible} 
+        onRequestClose={() => setModalVisible(!modalVisible)}
+        onPressIncomingTransaction={() => {
+          setModalVisible(!modalVisible), 
+          navigation.push('IncomingTransaction')
+        }}
+      />
+      
+      <ScrollView style={styles.scrollView}>
+        <View style={{
+          flex: 1,
+          flexDirection: 'row',
+          flexWrap: 'wrap', 
+        }}>
+          {dataSampah.map(item => (
+            <CardProduct 
+              key={item.id} 
+              item={item} 
+              onPress={() => setModalVisible(true)}
+            />
+          ))}
+        </View>
+      </ScrollView>
 
       <View style={{
         position: 'absolute',

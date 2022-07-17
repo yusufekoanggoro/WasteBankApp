@@ -18,6 +18,7 @@ const WasteStackNavigator = () => {
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="WasteDataList" component={WasteDataListScreen} />
         <Stack.Screen name="InputWasteData" component={InputWasteDataScreen} />
+        <Stack.Screen name="IncomingTransaction" component={IncomingTransactionScreen} />
       </Stack.Navigator>
     );
 }
@@ -25,7 +26,7 @@ const WasteStackNavigator = () => {
 const InTransactionNavigator = () => {
     return (
       <Stack.Navigator screenOptions={{headerShown: false}}>
-        <Stack.Screen name="WasteDataList" component={IncomingTransactionScreen} />
+        <Stack.Screen name="IncomingTransaction" component={IncomingTransactionScreen} />
       </Stack.Navigator>
     );
 }

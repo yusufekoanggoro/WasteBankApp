@@ -6,21 +6,26 @@ import {
 } from 'react-native'
 import { Text } from '@rneui/themed';
 
-const CardProduct = () => {
+const CardProduct = (props) => {
+  const { 
+    name, 
+    harga,
+  } = props.item;
+ 
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={props.onPress}>
         <View style={styles.wrapCard}>
             <View style={styles.image} />
             <Text h4 h4Style={{
                 fontFamily: 'Nunito-Regular',
                 fontWeight: '100',
-            }}>Kardus</Text>
+            }}>{name}</Text>
             <Text h4 h4Style={{
                 fontFamily: 'Nunito-Regular',
                 fontWeight: '100',
-            }}>RP. 2000/Kg</Text>
+            }}>RP. {harga}/Kg</Text>
         </View>
-    </View>
+    </TouchableOpacity>
   );
 }
 
