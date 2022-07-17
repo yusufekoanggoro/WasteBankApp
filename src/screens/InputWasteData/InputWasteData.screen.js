@@ -57,34 +57,60 @@ const InputWasteData = ({ navigation }) => {
                 </View>
             </View>
 
+  
             <View style={{marginBottom: 20}}>
                 <View style={{marginBottom: 12}}>
                   <Text style={{color: '#2E434D',fontSize: 16,}}>Upload Gambar</Text>
                 </View>
                 <View>
-                  <Button title="Upload">
-                  </Button>
-                </View>
-            </View>
-            <View style={{marginBottom: 20}}>
-                <View style={{marginBottom: 12}}>
-                  <Text style={{color: '#2E434D',fontSize: 16,}}>Upload Gambar</Text>
+                  <View>
+                    <Text>View 1</Text>
+                  </View>
+                  <View>
+                    <Text>View 2</Text>
+                  </View>
                 </View>
                 <View>
-                  <Button title="Upload">
-                  </Button>
+                  <TouchableOpacity
+                    style={styles.buttonStyle}
+                    activeOpacity={0.5}
+                    >
+                    <Text style={styles.buttonTextStyle}>Select File</Text>
+                  </TouchableOpacity>
                 </View>
             </View>
 
-            <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
-              <View style={{flex: 1}}>
-                  <TouchableOpacity style={{backgroundColor: "red"}} >
-                      <Text style={{color: 'red'}}>Batal</Text>
+            <View style={{
+                display: 'flex', 
+                flexDirection: 'column',
+                marginBottom: 20
+              }}>
+                <View style={{
+                  marginBottom: 5
+                }}>
+                  <Text style={{
+                    color: '#2E434D',
+                    fontSize: 16
+                  }}>Deskripsi</Text>
+                </View>
+                <View>
+                  <TextInput
+                      multiline={true}
+                      numberOfLines={4}
+                      style={{...styles.input, height: 64}}
+                      placeholder="Deskripsi"
+                      placeholderTextColor="#ADADAD"
+                  />
+                </View>
+            </View>
+
+            <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'flex-end'}}>
+              <View style={{width: '50%'}}>
+                  <TouchableOpacity style={{...styles.buttonContainer}} >
+                      <Text style={styles.buttonText}>Submit</Text>
                   </TouchableOpacity>
               </View>
-              <View style={{flex: 1, marginLeft: 12}}>
-                  <Button color='#C72037' title='Submit'></Button>
-              </View>
+              
             </View>
         </View>
     </ScrollView> 

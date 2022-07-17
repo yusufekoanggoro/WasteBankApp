@@ -19,4 +19,42 @@ export default StyleSheet.create({
     fontSize: 14,
     height: 44
   },
+  buttonContainer: {
+    backgroundColor: "#66CDAA",
+    borderRadius: 100,
+    height: 37,
+    justifyContent: 'center'
+  },
+  buttonText: {
+    fontSize: 15,
+    color: "#FFFFFF",
+    fontWeight: "bold",
+    alignSelf: "center",
+    textTransform: "uppercase"
+  },
+  buttonStyle: {
+    backgroundColor: '#307ecc',
+    borderWidth: 0,
+    color: '#FFFFFF',
+    borderColor: '#307ecc',
+    height: 40,
+    alignItems: 'center',
+    borderRadius: 30,
+    marginLeft: 35,
+    marginRight: 35,
+    marginTop: 15,
+  },
+  buttonTextStyle: {
+    color: '#FFFFFF',
+    paddingVertical: 10,
+    fontSize: 16,
+  },
+  textStyle: {
+    backgroundColor: '#fff',
+    fontSize: 15,
+    marginTop: 16,
+    marginLeft: 35,
+    marginRight: 35,
+    textAlign: 'center',
+  },
 });
