@@ -1,6 +1,6 @@
 import React from "react";
 import { createNativeStackNavigator } from  '@react-navigation/native-stack';
-import { HomeScreen, ProfileScreen, WasteDataListScreen, InputWasteDataScreen, IncomingTransactionScreen, LoginScreen } from '../screens'
+import { HomeScreen, ProfileScreen, WasteDataListScreen, InputWasteDataScreen, IncomingTransactionScreen, LoginScreen, ReportScreen } from '../screens'
 
 const Stack = createNativeStackNavigator();
 
@@ -29,6 +29,14 @@ const InTransactionNavigator = () => {
         <Stack.Screen name="IncomingTransaction" component={IncomingTransactionScreen} />
       </Stack.Navigator>
     );
+}
+
+const ReportNavigator = () => {
+  return (
+    <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Screen name="Report" component={ReportScreen} />
+    </Stack.Navigator>
+  );
 }
 
 const AuthStackNavigator = ({token}) => {
