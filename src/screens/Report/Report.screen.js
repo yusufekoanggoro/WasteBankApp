@@ -23,6 +23,7 @@ const Report = ({ navigation }) => {
       <Header navigation={navigation} centerTitle="Laporan" />
 
       <DatePicker
+        mode={'date'}
         modal
         open={openDateFirst}
         date={dateFirst}
@@ -36,6 +37,7 @@ const Report = ({ navigation }) => {
       />
 
       <DatePicker
+        mode={'date'}
         modal
         open={openEndDate}
         date={endDate}
