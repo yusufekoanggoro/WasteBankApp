@@ -10,7 +10,7 @@ import Header from '../../components/Header';
 const IncomingTransaction = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Header navigation={navigation} centerTitle="Transaksi Masuk" />
+      <Header navigation={navigation} centerTitle="Transaksi Masuk" buttonBack={true} />
 
       <View style={{ flex: 1, flexDirection: 'column' }}>
         {/* Logo */}

@@ -10,8 +10,8 @@ const MainNavigation = () => {
 
     const checkToken = async () => {
         try {
-          // let findingToken = await AsyncStorage.getItem('tokenUser');
-          setFoundToken('findingToken');
+          let findingToken = await AsyncStorage.getItem('accessToken');
+          setFoundToken(findingToken);
         } catch (error) {
           console.log(error);
         }

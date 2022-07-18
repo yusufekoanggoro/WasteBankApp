@@ -11,8 +11,8 @@ const CardReport = (props) => {
   return (
     <View style={styles.container}>
         <View style={styles.wrapCardLeft}>
-            <Text style={{ color: 'white', fontWeight: 'bold' }}>TRX-123456789</Text>
-            <Text style={{ color: 'white', fontWeight: 'bold' }}>2020-07-17</Text>
+            <Text style={{ color: 'white', fontWeight: 'bold', textAlign: 'center' }}>TRX-123456789s</Text>
+            <Text style={{ color: 'white', fontWeight: 'bold', textAlign: 'center'  }}>2020-07-17</Text>
         </View>
         <View style={styles.wrapCardRight}>
             <Text style={{ color: 'white', fontWeight: '700' }}>Gelas Plastik</Text>
@@ -24,25 +24,27 @@ const CardReport = (props) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: '100%',
-    height: 60,
+    display: 'flex',
     flexDirection: 'row',
     backgroundColor: 'gray',
     marginTop: 5,
     borderRadius: 5
   },
   wrapCardLeft: { 
-    width: '30%', 
+    flex:0.5, 
     justifyContent: 'center', 
     alignItems: 'center', 
     backgroundColor: '#66CDAA',
     borderTopLeftRadius: 5,
-    borderBottomLeftRadius: 5
+    borderBottomLeftRadius: 5,
+    paddingHorizontal: 5
   },
   wrapCardRight: { 
-    width: '70%', 
+    flex: 1, 
     justifyContent: 'center', 
-    marginLeft: 10 
+    marginLeft: 10 ,
+    alignItems: 'center', 
+    paddingHorizontal: 5
   }
 });
 

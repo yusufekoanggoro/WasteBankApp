@@ -64,7 +64,7 @@ export default {
    * @param {Object} reqConfig  custom config for request
    */
   post: (url, form = null, json = {}, reqConfig = {}) => {
-    const token = localStorage.getItem("accessToken");
+    const token = AsyncStorage.getItem("accessToken");
     if (token) {
       api.defaults.headers.Authorization = `Bearer ${token}`;
     }
@@ -86,8 +86,8 @@ export default {
    * @param {Sring} url '/path/to/endpoint'
    * @param {Object} data
    */
-  postData: (url, data = {}, customConfig = {}) => {
-    const token = localStorage.getItem("accessToken");
+  postData: async (url, data = {}, customConfig = {}) => {
+    const token = await AsyncStorage.getItem("accessToken");
     api.defaults.headers.Authorization = `Bearer ${token}`;
     api.defaults.headers["Content-Type"] = "multipart/form-data";
     api.defaults.timeout = 30000;

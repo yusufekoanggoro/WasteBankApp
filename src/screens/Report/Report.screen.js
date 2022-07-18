@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import {
   View,
-  Text
+  Text, 
+  ScrollView
 } from 'react-native'
 
 import {Picker} from '@react-native-picker/picker';
@@ -83,12 +84,25 @@ const Report = ({ navigation }) => {
             <Picker.Item label="Transakasi Keluar" value="js" />
           </Picker>
         </View>
-        
+        <ScrollView>
         <CardReport />
         <CardReport />
         <CardReport />
         <CardReport />
         <CardReport />
+        <CardReport />
+        <CardReport />
+        <CardReport />
+        <CardReport />
+        <CardReport />
+        <CardReport />
+        <CardReport />
+        <CardReport />
+        </ScrollView>
+        {/* <CardReport />
+        <CardReport />
+        <CardReport />
+        <CardReport /> */}
       </View>
     </>
   )

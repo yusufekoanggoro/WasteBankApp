@@ -17,7 +17,21 @@ export default StyleSheet.create({
     paddingTop: 12,
     paddingBottom: 12,
     fontSize: 14,
-    height: 44
+    height: 44,
+  },
+  inputDisable: {
+    backgroundColor: "#FDFDFD",
+    borderColor: '#DEE3ED',
+    borderRadius: 4,
+    borderWidth: 1,
+    borderStyle: 'solid', 
+    paddingLeft: 8,
+    paddingTop: 12,
+    paddingBottom: 12,
+    fontSize: 14,
+    height: 44,
+    color: '#808C92',
+    backgroundColor: '#EDF0F2'
   },
   buttonContainer: {
     backgroundColor: "#66CDAA",

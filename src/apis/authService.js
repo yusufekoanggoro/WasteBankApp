@@ -17,7 +17,7 @@ const signIn = async (params) => {
     .then(async (responseJson) => {
         let responseCodeSucces = [200]
         if(responseCodeSucces.indexOf(responseJson.code) >= 0 ){
-            await AsyncStorage.setItem('tokenUser', responseJson.data.accessToken);
+            await AsyncStorage.setItem('accessToken', responseJson.data.accessToken);
             setLoadingStatus(false)
             token()
         }else{
