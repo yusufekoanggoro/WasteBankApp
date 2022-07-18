@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   TouchableOpacity,
@@ -8,13 +8,26 @@ import { Text, Card } from '@rneui/themed';
 import styles from './WasteDataList.style'
 import Icon from 'react-native-vector-icons/AntDesign'
 
+import wasteService from '../../apis/wasteService';
+
 import ModalProduct from '../../components/Modal';
 import CardProduct from '../../components/CardProduct';
 import Header from '../../components/Header';
 
 
 const WasteDataList = ({ navigation }) => {
+  const [wasteData, setWasteData] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
+
+  useEffect(() => {
+    const getWaste = async () => {
+      const res = await wasteService.getWasteData();
+
+      setWasteData(res);
+    }
+
+    getWaste();
+  }, [])
 
   const dataSampah = [
     {
@@ -58,7 +71,7 @@ const WasteDataList = ({ navigation }) => {
           flexDirection: 'row',
           flexWrap: 'wrap', 
         }}>
-          {dataSampah.map(item => (
+          {wasteData.map(item => (
             <CardProduct 
               key={item.id} 
               item={item} 

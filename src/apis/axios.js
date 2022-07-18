@@ -1,6 +1,11 @@
 import axios from "axios";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import querystring from "qs";
-import config from "../config/config";
+// import config from "../config/config";
+
+const config = {
+  BASE_URL: 'http://localhost:8080'
+}
 
 const { BASE_URL } = config;
 
@@ -38,9 +43,11 @@ export default {
    * @param {Sring} url '/path/to/endpoint'
    * @param {Object} param query params
    */
-  get: (url, customConfig = {}) => {
-    const token = localStorage.getItem("accessToken");
-    api.defaults.headers.Authorization = `Bearer ${token}`;
+  get: async (url, customConfig = {}) => {
+    const token = await AsyncStorage.getItem('tokenUser');
+    if (token) {
+      api.defaults.headers.Authorization = `Bearer ${token}`;
+    }
     return api
       .get(url, {
         baseURL: config.BASE_URL,

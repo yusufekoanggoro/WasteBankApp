@@ -16,7 +16,7 @@ import {
 } from '@react-navigation/drawer';
 import styles from './SideMenu.style';
 import Icon from 'react-native-vector-icons/AntDesign'
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
  
 const SideMenu = (props) => {

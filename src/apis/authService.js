@@ -1,5 +1,5 @@
 import { apiHost } from '../envs/env.development'
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const signIn = async (params) => {
     let { username, password, navigation, token, setLoadingStatus } = params;

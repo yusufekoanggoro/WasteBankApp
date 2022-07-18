@@ -16,14 +16,14 @@ const CardProduct = (props) => {
     <TouchableOpacity style={styles.container} onPress={props.onPress}>
         <View style={styles.wrapCard}>
             <View style={styles.image} />
-            <Text h4 h4Style={{
+            <Text numberOfLines={1} h4 h4Style={{
                 fontFamily: 'Nunito-Regular',
                 fontWeight: '100',
             }}>{name}</Text>
             <Text h4 h4Style={{
                 fontFamily: 'Nunito-Regular',
                 fontWeight: '100',
-            }}>RP. {harga}/Kg</Text>
+            }}>RP. 2000/Kg</Text>
         </View>
     </TouchableOpacity>
   );
