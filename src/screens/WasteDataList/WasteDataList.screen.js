@@ -4,7 +4,7 @@ import {
   TouchableOpacity,
   ScrollView
 } from 'react-native'
-import { Text, Card } from '@rneui/themed';
+import { Skeleton, Text } from '@rneui/themed';
 import styles from './WasteDataList.style'
 import Icon from 'react-native-vector-icons/AntDesign'
 
@@ -17,40 +17,33 @@ import Header from '../../components/Header';
 
 const WasteDataList = ({ navigation }) => {
   const [wasteData, setWasteData] = useState([]);
+  const [isLoadingWaste, setIsLoadingWaste] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     const getWaste = async () => {
-      const res = await wasteService.getWasteData();
+      try {
+        setIsLoadingWaste(true)
+        const res = await wasteService.getWasteData();
 
-      setWasteData(res);
+        setWasteData(res);
+        setIsLoadingWaste(false)
+      } catch(error){
+        console.log(error)
+        setIsLoadingWaste(false)
+      }
     }
 
     getWaste();
   }, [])
 
-  const dataSampah = [
-    {
-      name: 'Kardus',
-      harga: 2000,
-      url: '',
-    },
-    {
-      name: 'Gelas Plastik',
-      harga: 1200,
-      url: '',
-    },
-    {
-      name: 'Pet',
-      harga: 1500,
-      url: '',
-    },
-    {
-      name: 'Besi',
-      harga: 3500,
-      url: '',
-    },
-  ]
+  const LoadingWaste = () => {
+    return (
+      <View style={styles.loading}>
+        <Skeleton width={'100%'} height={250} />
+      </View>
+    )
+  }
 
   return (
     <View style={styles.container}>
@@ -64,22 +57,33 @@ const WasteDataList = ({ navigation }) => {
           navigation.push('IncomingTransaction')
         }}
       />
-      
-      <ScrollView style={styles.scrollView}>
-        <View style={{
-          flex: 1,
-          flexDirection: 'row',
-          flexWrap: 'wrap', 
-        }}>
-          {wasteData.map(item => (
-            <CardProduct 
-              key={item.id} 
-              item={item} 
-              onPress={() => setModalVisible(true)}
-            />
-          ))}
+
+      {isLoadingWaste && (
+        <View style={styles.wrapLoading}>
+          <LoadingWaste />
+          <LoadingWaste />
+          <LoadingWaste />
+          <LoadingWaste />
         </View>
-      </ScrollView>
+      )}
+      
+      {!isLoadingWaste && (
+        <ScrollView style={styles.scrollView}>
+          <View style={{
+            flex: 1,
+            flexDirection: 'row',
+            flexWrap: 'wrap', 
+          }}>
+            {wasteData.map(item => (
+              <CardProduct 
+                key={item.id} 
+                item={item} 
+                onPress={() => setModalVisible(true)}
+              />
+            ))}
+          </View>
+        </ScrollView>
+      )}
 
       <View style={{
         position: 'absolute',
