@@ -17,6 +17,7 @@ import Header from '../../components/Header';
 
 const WasteDataList = ({ navigation }) => {
   const [wasteData, setWasteData] = useState([]);
+  const [wasteDataDetail, setWasteDataDetail] = useState({});
   const [isLoadingWaste, setIsLoadingWaste] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -26,7 +27,7 @@ const WasteDataList = ({ navigation }) => {
         setIsLoadingWaste(true)
         const res = await wasteService.getWasteData();
 
-        setWasteData(res);
+        setWasteData(res.data);
         setIsLoadingWaste(false)
       } catch(error){
         console.log(error)
@@ -45,13 +46,19 @@ const WasteDataList = ({ navigation }) => {
     )
   }
 
+  const handleClickModal = (wasteDetail) => {
+    setModalVisible(!modalVisible)
+    setWasteDataDetail(wasteDetail)
+  }
+
   return (
     <View style={styles.container}>
       <Header navigation={navigation} centerTitle="Data Sampah" />
 
       <ModalProduct 
         visible={modalVisible} 
-        onRequestClose={() => setModalVisible(!modalVisible)}
+        item={wasteDataDetail}
+        onRequestClose={() => handleClickModal({})}
         onPressIncomingTransaction={() => {
           setModalVisible(!modalVisible), 
           navigation.push('IncomingTransaction')
@@ -78,7 +85,7 @@ const WasteDataList = ({ navigation }) => {
               <CardProduct 
                 key={item.id} 
                 item={item} 
-                onPress={() => setModalVisible(true)}
+                onPress={() => handleClickModal(item)}
               />
             ))}
           </View>

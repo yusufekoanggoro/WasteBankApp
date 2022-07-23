@@ -11,6 +11,11 @@ const ModalProduct = (props) => {
   const {
     visible
   } = props;
+
+  const {
+    jenisSampah,
+    harga
+  } = props.item;
  
   return (
     <Modal
@@ -30,11 +35,11 @@ const ModalProduct = (props) => {
             <Text h4 h4Style={{
                 fontFamily: 'Nunito-Regular',
                 fontWeight: '100',
-            }}>Plastik</Text>
+            }}>{jenisSampah}</Text>
             <Text h4 h4Style={{
                 fontFamily: 'Nunito-Regular',
                 fontWeight: '100',
-            }}>RP. 2000/Kg</Text>
+            }}>RP. {harga}/Kg</Text>
 
             <View style={styles.wrapButtonCol}>
               <View style={styles.wrapButtonRow}>

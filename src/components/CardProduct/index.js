@@ -8,7 +8,7 @@ import { Text } from '@rneui/themed';
 
 const CardProduct = (props) => {
   const { 
-    name, 
+    jenisSampah, 
     harga,
   } = props.item;
  
@@ -19,11 +19,11 @@ const CardProduct = (props) => {
             <Text numberOfLines={1} h4 h4Style={{
                 fontFamily: 'Nunito-Regular',
                 fontWeight: '100',
-            }}>{name}</Text>
+            }}>{jenisSampah}</Text>
             <Text h4 h4Style={{
                 fontFamily: 'Nunito-Regular',
                 fontWeight: '100',
-            }}>RP. 2000/Kg</Text>
+            }}>RP. {harga}/Kg</Text>
         </View>
     </TouchableOpacity>
   );
