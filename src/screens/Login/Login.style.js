@@ -17,7 +17,8 @@ export default StyleSheet.create({
     paddingTop: 9,
     paddingBottom: 9,
     fontSize: 14,
-    height: 37
+    height: 37,
+    color:'red'
   },
   buttonContainer: {
     backgroundColor: "#90EE90",

@@ -58,7 +58,7 @@ const SideMenu = (props) => {
                 <DrawerItem
                             label="Logout"
                             onPress={async () => {
-                                await AsyncStorage.removeItem('tokenUser');
+                                await AsyncStorage.removeItem('accessToken');
                                 props.token()
                             }}
                 />
