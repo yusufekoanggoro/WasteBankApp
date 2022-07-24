@@ -12,6 +12,7 @@ export default StyleSheet.create({
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
     padding: 20
+
   },
   wrapTextInput: {
     marginBottom: 30,

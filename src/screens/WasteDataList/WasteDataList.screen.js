@@ -51,6 +51,8 @@ const WasteDataList = ({ navigation }) => {
     setWasteDataDetail(wasteDetail)
   }
 
+
+
   return (
     <View style={styles.container}>
       <Header navigation={navigation} centerTitle="Data Sampah" />
@@ -61,7 +63,9 @@ const WasteDataList = ({ navigation }) => {
         onRequestClose={() => handleClickModal({})}
         onPressIncomingTransaction={() => {
           setModalVisible(!modalVisible), 
-          navigation.push('IncomingTransaction')
+          navigation.navigate('IncomingTransaction', {
+            item: wasteDataDetail,
+          });
         }}
       />
 

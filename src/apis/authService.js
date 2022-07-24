@@ -6,6 +6,7 @@ const signIn = async (params) => {
     username = username.toLowerCase().trim();
 
     const URL = `${apiHost}/api/auth`;
+    console.log(URL)
     return await fetch(URL, {
         method: 'POST',
         headers: {

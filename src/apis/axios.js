@@ -44,8 +44,7 @@ export default {
    * @param {Object} param query params
    */
   get: async (url, customConfig = {}) => {
-    // const token = await AsyncStorage.getItem('tokenUser');
-    const token = 'eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFzZGRkIiwic3ViIjoiYXNkZGQiLCJpYXQiOjE2NTg1NDgzMTksImV4cCI6MTk3NDEyNDMxOSwiYXVkIjoiOTdiMzMxZGg5My00aGlsM2ZmLTRlODMzNTgtOTg0ODEyNC1iM2FBc2Q5YjlmNzJjMzQiLCJpc3MiOiJzYW5zdG9jayJ9.Z2-lWC94lg_bNfiTmWl79JWVcKmybjTRoHdgD3LtTmRWnLin2MltU3nsvjl3jjJe6bi0l89nnbjaAGpuz0v1pEJ169LD8CiqMnOpNkKOYlzMZyF9QVfRCtfRySCDMDdElgw6zy3ppWZLyuc9ngfMNGYzdUDQIknPFLE3ULPHRIL2wvilw926l7zCsbLEWmSRcROUvcbv3INlGVLzvJ_7v02CxKN5wzlDK-ZihgbphUs4BY-2czS-2J51UfpEWBx9ZC3Lh2SxizHNNsvLcMMqkm5mtkYI7JHoWvqhC33DIE_WfWCA_9l1a-4lznb32v0c5__oX9paOn9cmCLmpGNHrw';
+    const token = await AsyncStorage.getItem('accessToken');
     if (token) {
       api.defaults.headers.Authorization = `Bearer ${token}`;
     }
@@ -63,13 +62,14 @@ export default {
    * @param {Object} form
    * @param {Object} reqConfig  custom config for request
    */
-  post: (url, form = null, json = {}, reqConfig = {}) => {
-    const token = AsyncStorage.getItem("accessToken");
+  post: async (url, form = null, json = {}, reqConfig = {}) => {
+    const token = await AsyncStorage.getItem("accessToken");
     if (token) {
       api.defaults.headers.Authorization = `Bearer ${token}`;
     }
     api.defaults.headers["Content-Type"] = form ? "application/x-www-form-urlencoded" : "application/json";
     const data = querystring.stringify(form) || json;
+    console.log(data)
     return api
       .post(url, data, {
         params: querystring.stringify(form),
