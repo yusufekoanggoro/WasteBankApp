@@ -159,9 +159,10 @@ const IncomingTransaction = ({ navigation }) => {
         "datas": data,
         "tunai": 100000,
         "type": "in"
-      }      
-  
+      }
+      
       const response = await transaction.postTransaction(payload);
+      console.log(response)
       
       if(response.code === 201) {
         setLoading(false)
@@ -188,6 +189,7 @@ const IncomingTransaction = ({ navigation }) => {
         path : DownloadDir + '/download.pdf',
       }
     }
+    console.log()
     config(options).fetch('GET', `${apiHost}${file}`, {
       Authorization : `Bearer ${token}`,
     }).then((res) => {
