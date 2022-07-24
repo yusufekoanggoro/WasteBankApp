@@ -19,25 +19,26 @@ import transaction from '../../apis/transaction';
 import wasteService from '../../apis/wasteService';
 
 
-const IncomingTransaction = ({ route, navigation }) => {
-  // const { item } = route.params;
-
+const IncomingTransaction = ({ navigation }) => {
   const [jumlahSampah, setJumlahSampah] = useState([
     {
       id: 1,
+      selectId: 1,
       jenisSampah: '',
       harga: 0,
       berat: 0,
       total: 0,
     }
   ]);
-  const [wasteData, setWasteData] = useState([]);
+  const [wasteData, setWasteData] = useState([
+    {id: 1, jenisSampah: 'plastik', harga: 500},
+    {id: 2, jenisSampah: 'besi', harga: 1000}
+  ]);
   const [berat, setBerat] = useState(0);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [modalSuccses, setModalSuccses] = useState(false);
   const [file, setFIle] = useState('');
-
   const transactionId = `TM-${Math.random().toString().slice(2,11)}`;
 
   useEffect(() => {
@@ -54,16 +55,13 @@ const IncomingTransaction = ({ route, navigation }) => {
 
     getWaste();
   }, [])
-
-  const handleDropdownOpen = () => {
-    setDropdownOpen(!dropdownOpen)
-  }
   
   const handleAddSampah = () => {
     let idSampah = jumlahSampah.slice(-1).pop().id + 1;
 
     const sampah = {
       id: idSampah,
+      selectId: 1,
       jenisSampah: '',
       harga: 0,
       berat: 0,
@@ -86,9 +84,24 @@ const IncomingTransaction = ({ route, navigation }) => {
     }
   }
 
-  // handleChangeSelect = (itemId, item) => {
-    
-  // }
+  const handleChangeSelect = (itemId, id) => {
+    const wasteDetail = wasteData.filter(item => item.id === id)[0];
+
+    setJumlahSampah(current =>
+      current.map(obj => {
+        if (obj.id === itemId) {
+          return {
+            ...obj, 
+            selectId: id,
+            jenisSampah: wasteDetail.jenisSampah,
+            harga: wasteDetail.harga
+          }
+        }
+
+        return obj;
+      }),
+    );
+  }
 
   const handleChangeBerat = (itemId, berat) => {
     console.log(berat)
@@ -99,7 +112,7 @@ const IncomingTransaction = ({ route, navigation }) => {
           return {
             ...obj, 
             berat, 
-            total: berat !== '' ? parseInt(berat) : 0};
+            total: berat !== '' ? parseInt(berat * obj.harga) : 0};
         }
 
         return obj;
@@ -126,19 +139,24 @@ const IncomingTransaction = ({ route, navigation }) => {
   const handleSubmit = async () => {
     try {
       setLoading(true)
+
+      let data = [];
+
+      jumlahSampah.map(item => {
+        data.push({
+          "wasteId": item.selectId,
+          "jenisSampah": item.jenisSampah,
+          "satuan": "KG",
+          "berat": item.berat,
+          "harga": item.harga,
+          "deskripsi": "",
+          "total": item.total
+        })
+      })
+
       const payload = {
-        "transactionId": "TM-388347",
-        "datas": [
-          {
-            "wasteId": 1,
-            "jenisSampah": "Organik",
-            "satuan": "KG",
-            "berat": 2,
-            "harga": 1000,
-            "deskripsi": "",
-            "total": 12000
-          }
-        ],
+        "transactionId": transactionId,
+        "datas": data,
         "tunai": 100000,
         "type": "in"
       }      
@@ -184,7 +202,7 @@ const IncomingTransaction = ({ route, navigation }) => {
       
       <Header navigation={navigation} centerTitle="Transaksi Masuk" buttonBack={true} />
 
-      <Text>{JSON.stringify(wasteData)}</Text>
+      <Text>{JSON.stringify(jumlahSampah)}</Text>
 
       {/* Modal Succses Input Transaksi */}
       <Dialog
@@ -225,21 +243,20 @@ const IncomingTransaction = ({ route, navigation }) => {
                     </View>
                   </View>
                   <View style={styles.wrapTextInput}>
-                    <Picker
-                      dropdownIconColor="black"
-                      style={{ height: 40, width: '100%', color: 'black', backgroundColor: '#FFF'}}
-                      // onValueChange={(itemValue, itemIndex) => handleChangeSelect()}
-                    >
-                      {wasteData.map(item => (
-                        <Picker.Item label={item.jenisSampah} value={item.id} />  
-                      ))}
-
-                        {/* <Picker.Item label="Java" value="java" />   */}
-                    </Picker>
+                  <Picker
+                    selectedValue={item.selectId}
+                    dropdownIconColor="black"
+                    style={{ height: 40, width: '100%', color: 'black', backgroundColor: '#FFF'}}
+                    onValueChange={(itemValue, itemIndex) => handleChangeSelect(item.id, itemValue)}
+                  >
+                    {wasteData.map(item => (
+                      <Picker.Item label={item.jenisSampah} value={item.id} />
+                    ))}
+                  </Picker>
                   </View>
                   <View style={styles.wrapTextInput}>
                     <TextInput
-                        // defaultValue={`RP. ${item.harga}`}
+                        defaultValue={`RP. ${item.harga}`}
                         editable={false}
                         style={styles.input}
                         placeholder="Harga"
