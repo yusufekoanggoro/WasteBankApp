@@ -14,7 +14,6 @@ import ModalProduct from '../../components/Modal';
 import CardProduct from '../../components/CardProduct';
 import Header from '../../components/Header';
 
-
 const WasteDataList = ({ navigation }) => {
   const [wasteData, setWasteData] = useState([]);
   const [wasteDataDetail, setWasteDataDetail] = useState({});

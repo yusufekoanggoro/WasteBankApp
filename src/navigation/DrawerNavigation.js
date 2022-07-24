@@ -42,7 +42,7 @@ const DrawerNavigation = ({token}) => {
                         }
                     }} 
                     name="Laporan" component={ReportScreen} />
-                {/* <Drawer.Screen 
+                <Drawer.Screen 
                     options={{
                         drawerActiveBackgroundColor: 'red',
                         drawerActiveTintColor:  '#000000',
@@ -50,7 +50,7 @@ const DrawerNavigation = ({token}) => {
                             backgroundColor: '#66CDAA'
                         }
                     }} 
-                    name="Transaksi Keluar" component={ProfileScreen} /> */}
+                    name="Transaksi Masuk" component={InTransactionNavigator} />
             </Drawer.Navigator>
     )
 }
