@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   View,
   Text, 
@@ -7,17 +7,73 @@ import {
 
 import {Picker} from '@react-native-picker/picker';
 import DatePicker from 'react-native-date-picker'
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import Icon from 'react-native-vector-icons/AntDesign';
+import RNFetchBlob from 'rn-fetch-blob';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import styles from './Report.style';
 
 import Header from '../../components/Header';
 import CardReport from '../../components/CardReport';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+
+import { apiHost } from '../../envs/env.development';
+import reportService from '../../apis/reportService';
 
 const Report = ({ navigation }) => {
-  const [selectedValue, setSelectedValue] = useState("java");
+  const [selectedValue, setSelectedValue] = useState("in");
   const [dateFirst, setDateFirst] = useState(new Date())
   const [openDateFirst, setOpenDateFirst] = useState(false)
   const [endDate, setEndDate] = useState(new Date())
   const [openEndDate, setOpenEndDate] = useState(false)
+  const [dataTransactions, setDataTransactions] = useState([]);
+
+  useEffect(() => {
+    const getReports = async () => {
+      try{
+        const response = await reportService.getReport(`page=1&size=10&sort=createdAt%3Adesc&startDate=01%2F01%2F2022&endDate=24%2F07%2F2022&type=in`);
+
+        setDataTransactions(response.data)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    getReports()
+  }, [])
+
+  const downLoadFile = async (file) => {
+    const { config, fs } = RNFetchBlob
+    const token = await AsyncStorage.getItem("accessToken");
+
+    let DownloadDir = fs.dirs.DownloadDir
+    let options = {
+      fileCache: true,
+      addAndroidDownloads : {
+        useDownloadManager : true,
+        notification : true,
+        path : DownloadDir + '/download.xlsx',
+      }
+    }
+    config(options).fetch('GET', `${apiHost}${file}`, {
+      Authorization : `Bearer ${token}`,
+    }).then((res) => {
+      console.log('The file saved')
+    }).catch(error => console.log(error))
+  }
+
+  const getDownloadReport = async () => {
+    try {
+      const response = await reportService.getDownloadReport(`startDate=01%2F01%2F2022&endDate=25%2F07%2F2022&type=in`);
+      const data = response.data;
+
+      if(response.code === 200) {
+        await downLoadFile(data.fileName);
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <>
@@ -80,29 +136,31 @@ const Report = ({ navigation }) => {
             style={{ height: 40, width: 200, color: 'black'}}
             onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
           >
-            <Picker.Item label="Transakasi Masuk" value="java" />
-            <Picker.Item label="Transakasi Keluar" value="js" />
+            <Picker.Item label="Transakasi Masuk" value="in" />
+            <Picker.Item label="Transakasi Keluar" value="out" />
           </Picker>
         </View>
         <ScrollView>
-        <CardReport />
-        <CardReport />
-        <CardReport />
-        <CardReport />
-        <CardReport />
-        <CardReport />
-        <CardReport />
-        <CardReport />
-        <CardReport />
-        <CardReport />
-        <CardReport />
-        <CardReport />
-        <CardReport />
+          {dataTransactions.map(item => (
+            <CardReport key={item.transactionId} item={item} />
+          ))}
         </ScrollView>
-        {/* <CardReport />
-        <CardReport />
-        <CardReport />
-        <CardReport /> */}
+        <View style={{
+          position: 'absolute',
+          flex: 1,
+          bottom: 15,
+          right: 15,
+          alignSelf: 'flex-end',
+        }}>
+          <TouchableOpacity
+            style={styles.roundButton1}
+            onPress={() => getDownloadReport()}
+            >
+              <View>
+                <Icon name={'download'} size={30} color={'#FFF'} />
+              </View>
+          </TouchableOpacity>
+        </View>
       </View>
     </>
   )

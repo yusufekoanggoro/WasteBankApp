@@ -35,15 +35,6 @@ const DrawerNavigation = ({token}) => {
                     name="Data Sampah" component={WasteStackNavigator} />
                 <Drawer.Screen 
                     options={{
-                        // drawerActiveBackgroundColor: 'red',
-                        drawerActiveTintColor:  '#000000',
-                        headerStyle: {
-                            backgroundColor: '#66CDAA'
-                        }
-                    }} 
-                    name="Laporan" component={ReportScreen} />
-                <Drawer.Screen 
-                    options={{
                         drawerActiveBackgroundColor: 'red',
                         drawerActiveTintColor:  '#000000',
                         headerStyle: {
@@ -51,6 +42,15 @@ const DrawerNavigation = ({token}) => {
                         }
                     }} 
                     name="Transaksi Masuk" component={InTransactionNavigator} />
+                <Drawer.Screen 
+                    options={{
+                        // drawerActiveBackgroundColor: 'red',
+                        drawerActiveTintColor:  '#000000',
+                        headerStyle: {
+                            backgroundColor: '#66CDAA'
+                        }
+                    }} 
+                    name="Laporan" component={ReportScreen} />
             </Drawer.Navigator>
     )
 }

@@ -10,6 +10,7 @@ import Spinner from 'react-native-loading-spinner-overlay/lib';
 import RNFetchBlob from 'rn-fetch-blob';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Picker} from '@react-native-picker/picker';
+import { useRoute } from '@react-navigation/native';
 
 import styles from './IncomingTransaction.style'
 
@@ -19,7 +20,9 @@ import transaction from '../../apis/transaction';
 import wasteService from '../../apis/wasteService';
 
 
-const IncomingTransaction = ({ navigation }) => {
+const IncomingTransaction = ({ params, navigation }) => {
+  const route = useRoute();
+  
   const [jumlahSampah, setJumlahSampah] = useState([
     {
       id: 1,
