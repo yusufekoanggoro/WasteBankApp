@@ -28,19 +28,37 @@ const Report = ({ navigation }) => {
   const [openEndDate, setOpenEndDate] = useState(false)
   const [dataTransactions, setDataTransactions] = useState([]);
 
+  // useEffect(() => {
+  //   const getReports = async () => {
+  //     try{
+  //       const response = await reportService.getReport(`page=1&size=10&sort=createdAt%3Adesc&startDate=01%2F01%2F2022&endDate=26%2F07%2F2022&type=in`);
+  //       console.log(response)
+
+  //       setDataTransactions(response.data)
+  //     } catch (error) {
+  //       console.log(error)
+  //     }
+  //   }
+
+  //   getReports()
+  // }, [])
+
   useEffect(() => {
-    const getReports = async () => {
-      try{
-        const response = await reportService.getReport(`page=1&size=10&sort=createdAt%3Adesc&startDate=01%2F01%2F2022&endDate=24%2F07%2F2022&type=in`);
+    getReports(selectedValue, dateFirst.toISOString().split('T')[0], endDate.toISOString().split('T')[0])
+  }, [selectedValue, dateFirst, endDate])
 
+  const getReports = async (type, startDate, endDate) => {
+    try{
+      const response = await reportService.getReport(`page=1&size=10&sort=createdAt%3Adesc&startDate=${startDate}&endDate=${endDate}&type=${type}`);
+
+      if(response.code === 200) {
+        setDataTransactions([])
         setDataTransactions(response.data)
-      } catch (error) {
-        console.log(error)
       }
+    } catch (error) {
+      console.log(error)
     }
-
-    getReports()
-  }, [])
+  }
 
   const downLoadFile = async (file) => {
     const { config, fs } = RNFetchBlob
@@ -64,7 +82,7 @@ const Report = ({ navigation }) => {
 
   const getDownloadReport = async () => {
     try {
-      const response = await reportService.getDownloadReport(`startDate=01%2F01%2F2022&endDate=25%2F07%2F2022&type=in`);
+      const response = await reportService.getDownloadReport(`startDate=${dateFirst.toISOString().split('T')[0]}&endDate=${endDate.toISOString().split('T')[0]}&type=${selectedValue}`);
       const data = response.data;
 
       if(response.code === 200) {
@@ -85,6 +103,7 @@ const Report = ({ navigation }) => {
         open={openDateFirst}
         date={dateFirst}
         onConfirm={(date) => {
+          console.log(date)
           setOpenDateFirst(false)
           setDateFirst(date)
         }}
@@ -141,8 +160,8 @@ const Report = ({ navigation }) => {
           </Picker>
         </View>
         <ScrollView>
-          {dataTransactions.map(item => (
-            <CardReport key={item.transactionId} item={item} />
+          {dataTransactions.map((item, index) => (
+            <CardReport key={index} item={item} />
           ))}
         </ScrollView>
         <View style={{

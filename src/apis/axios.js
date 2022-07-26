@@ -44,6 +44,7 @@ export default {
    * @param {Object} param query params
    */
   get: async (url, customConfig = {}) => {
+    console.log(url)
     const token = await AsyncStorage.getItem('accessToken');
     if (token) {
       api.defaults.headers.Authorization = `Bearer ${token}`;

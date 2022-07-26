@@ -44,7 +44,7 @@ const IncomingTransaction = ({ params, navigation }) => {
   const [modalSuccses, setModalSuccses] = useState(false);
   const [file, setFIle] = useState('');
   const transactionId = `${route.name === 'IncomingTransaction' ? 'TM' : 'TR'}-${Math.random().toString().slice(2,11)}`;
-  const title = route.name === 'IncomingTransaction' ? 'Transaksi Masuk' : 'Transakasi Keluar';
+  const title = route.name === 'IncomingTransaction' ? 'Transaksi Masuk' : 'Transaksi Keluar';
 
   useEffect(() => {
     const getWaste = async () => {
@@ -203,7 +203,7 @@ const IncomingTransaction = ({ params, navigation }) => {
       
       <Header navigation={navigation} centerTitle={title} />
 
-      <Text>{JSON.stringify(jumlahSampah)}</Text>
+      {/* <Text>{JSON.stringify(jumlahSampah)}</Text> */}
 
       {/* Modal Succses Input Transaksi */}
       <Dialog
