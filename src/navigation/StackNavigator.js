@@ -31,6 +31,14 @@ const InTransactionNavigator = () => {
     );
 }
 
+const OutTransactionNavigator = () => {
+  return (
+    <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Screen name="OutcomingTransaction" component={IncomingTransactionScreen} />
+    </Stack.Navigator>
+  );
+}
+
 const ReportNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
@@ -51,4 +59,11 @@ const AuthStackNavigator = ({token}) => {
   );
 }
 
-export { HomeStackNavigator, WasteStackNavigator, InTransactionNavigator, AuthStackNavigator };
+export { 
+  HomeStackNavigator, 
+  WasteStackNavigator, 
+  InTransactionNavigator, 
+  OutTransactionNavigator, 
+  AuthStackNavigator, 
+  ReportNavigator 
+};

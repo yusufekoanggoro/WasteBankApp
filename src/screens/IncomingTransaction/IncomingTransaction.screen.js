@@ -22,6 +22,7 @@ import wasteService from '../../apis/wasteService';
 
 const IncomingTransaction = ({ params, navigation }) => {
   const route = useRoute();
+  console.log(route.name)
   
   const [jumlahSampah, setJumlahSampah] = useState([
     {
@@ -42,7 +43,8 @@ const IncomingTransaction = ({ params, navigation }) => {
   const [loading, setLoading] = useState(false);
   const [modalSuccses, setModalSuccses] = useState(false);
   const [file, setFIle] = useState('');
-  const transactionId = `TM-${Math.random().toString().slice(2,11)}`;
+  const transactionId = `${route.name === 'IncomingTransaction' ? 'TM' : 'TR'}-${Math.random().toString().slice(2,11)}`;
+  const title = route.name === 'IncomingTransaction' ? 'Transaksi Masuk' : 'Transakasi Keluar';
 
   useEffect(() => {
     const getWaste = async () => {
@@ -148,12 +150,7 @@ const IncomingTransaction = ({ params, navigation }) => {
       jumlahSampah.map(item => {
         data.push({
           "wasteId": item.selectId,
-          "jenisSampah": item.jenisSampah,
-          "satuan": "KG",
           "berat": item.berat,
-          "harga": item.harga,
-          "deskripsi": "",
-          "total": item.total
         })
       })
 
@@ -161,11 +158,10 @@ const IncomingTransaction = ({ params, navigation }) => {
         "transactionId": transactionId,
         "datas": data,
         "tunai": 100000,
-        "type": "in"
+        "type": route.name === 'IncomingTransaction' ? 'in' : 'out'
       }
       
       const response = await transaction.postTransaction(payload);
-      console.log(response)
       
       if(response.code === 201) {
         setLoading(false)
@@ -205,7 +201,7 @@ const IncomingTransaction = ({ params, navigation }) => {
       
       {loading && <Spinner visible={loading} />}
       
-      <Header navigation={navigation} centerTitle="Transaksi Masuk" buttonBack={true} />
+      <Header navigation={navigation} centerTitle={title} />
 
       <Text>{JSON.stringify(jumlahSampah)}</Text>
 
