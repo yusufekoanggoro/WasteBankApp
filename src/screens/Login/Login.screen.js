@@ -90,6 +90,7 @@ const Login = ({ navigation, token }) => {
                       placeholderTextColor="#A9A9A9"
                       onChangeText={(text) => setPassword(text)}
                       secureTextEntry={true}
+                      autoCapitalize='none'
                   />
                 </View>
             </View>
