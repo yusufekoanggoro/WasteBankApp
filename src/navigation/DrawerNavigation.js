@@ -4,8 +4,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { HomeScreen, ProfileScreen, WasteDataListScreen, InputWasteDataScreen, ReportScreen, IncomingTransactionScreen } from '../screens'
 import CustomSidebarMenu from './SideMenu/SideMenu';
 import { HomeStackNavigator, WasteStackNavigator, InTransactionNavigator, OutTransactionNavigator, ReportNavigator } from './StackNavigator'
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import jwt_decode from "jwt-decode";
 
 const Drawer = createDrawerNavigator()
 
