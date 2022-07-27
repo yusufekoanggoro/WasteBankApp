@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import {
   View,
   TouchableOpacity,
-  ScrollView
+  ScrollView,
+  RefreshControl
 } from 'react-native'
 import { Skeleton, Text } from '@rneui/themed';
 import styles from './WasteDataList.style'
@@ -14,11 +15,16 @@ import ModalProduct from '../../components/Modal';
 import CardProduct from '../../components/CardProduct';
 import Header from '../../components/Header';
 
+const wait = (timeout) => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
+}
+
 const WasteDataList = ({ navigation }) => {
   const [wasteData, setWasteData] = useState([]);
   const [wasteDataDetail, setWasteDataDetail] = useState({});
   const [isLoadingWaste, setIsLoadingWaste] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
     const getWaste = async () => {
@@ -37,6 +43,15 @@ const WasteDataList = ({ navigation }) => {
     getWaste();
   }, [])
 
+  const onRefresh = React.useCallback( async() => {
+    setRefreshing(true);
+    const res = await wasteService.getWasteData();
+
+    setWasteData(res.data);
+    setRefreshing(false)
+    // wait(2000).then(() => setRefreshing(false));
+  }, []);
+
   const LoadingWaste = () => {
     return (
       <View style={styles.loading}>
@@ -49,8 +64,6 @@ const WasteDataList = ({ navigation }) => {
     setModalVisible(!modalVisible)
     setWasteDataDetail(wasteDetail)
   }
-
-
 
   return (
     <View style={styles.container}>
@@ -78,7 +91,14 @@ const WasteDataList = ({ navigation }) => {
       )}
       
       {!isLoadingWaste && (
-        <ScrollView style={styles.scrollView}>
+        <ScrollView style={styles.scrollView}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+          />
+        }
+        >
           <View style={{
             flex: 1,
             flexDirection: 'row',
