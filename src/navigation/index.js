@@ -7,11 +7,14 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const MainNavigation = () => { 
     const [foundToken, setFoundToken] = useState('');
+    const [roleUser, setUserRole] = useState('');
 
     const checkToken = async () => {
         try {
           let findingToken = await AsyncStorage.getItem('accessToken');
           setFoundToken(findingToken);
+          let roleUser = await AsyncStorage.getItem('roleUser');
+          setUserRole(roleUser)
         } catch (error) {
           console.log(error);
         }
@@ -23,7 +26,7 @@ const MainNavigation = () => {
     
     return (
         <NavigationContainer>
-            { (foundToken !== null ? (<DrawerNavigation token={checkToken} />) : (<AuthStackNavigator token={checkToken} />)) }
+            { (foundToken !== null ? (<DrawerNavigation token={checkToken} role={roleUser} />) : (<AuthStackNavigator token={checkToken} />)) }
         </NavigationContainer>
     )
  }

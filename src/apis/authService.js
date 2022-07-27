@@ -19,6 +19,7 @@ const signIn = async (params) => {
         let responseCodeSucces = [200]
         if(responseCodeSucces.indexOf(responseJson.code) >= 0 ){
             await AsyncStorage.setItem('accessToken', responseJson.data.accessToken);
+            await AsyncStorage.setItem('roleUser', responseJson.data.sub.role);
             setLoadingStatus(false)
             token()
         }else{
