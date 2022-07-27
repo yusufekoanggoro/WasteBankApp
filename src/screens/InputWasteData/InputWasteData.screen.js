@@ -137,8 +137,8 @@ const InputWasteData = ({ navigation }) => {
                 <View>
                   <TextInput
                       value={satuan}
-                      style={styles.input}
-                      placeholder="kg"
+                      style={{...styles.input, textTransform: 'uppercase'}}
+                      placeholder="KG"
                       placeholderTextColor="#ADADAD"
                       onChangeText={(text) => onChangeText('satuan', text)}
                   />

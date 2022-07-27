@@ -2,20 +2,31 @@ import React from 'react';
 import {
   View,
   TouchableOpacity,
-  StyleSheet
+  StyleSheet, 
+  Image
 } from 'react-native'
 import { Text } from '@rneui/themed';
+import { apiHost } from '../../envs/env.development'
 
 const CardProduct = (props) => {
   const { 
     jenisSampah, 
     harga,
+    gambar
   } = props.item;
- 
+
   return (
     <TouchableOpacity style={styles.container} onPress={props.onPress}>
         <View style={styles.wrapCard}>
-            <View style={styles.image} />
+            <View style={styles.image}>
+              <Image
+                source={{uri: `${apiHost}/uploads/${gambar}`}}
+                style={{
+                  height: 135,
+                  width: 155
+                }}
+              />
+            </View>
             <Text numberOfLines={1} h4 h4Style={{
                 fontFamily: 'Nunito-Regular',
                 fontWeight: '100',

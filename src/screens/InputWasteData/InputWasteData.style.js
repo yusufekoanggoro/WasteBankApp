@@ -18,6 +18,7 @@ export default StyleSheet.create({
     paddingBottom: 12,
     fontSize: 14,
     height: 44,
+    color: '#A9A9A9'
   },
   inputDisable: {
     backgroundColor: "#FDFDFD",
@@ -71,4 +72,7 @@ export default StyleSheet.create({
     marginRight: 35,
     textAlign: 'center',
   },
+  uri: {
+    color: '#A9A9A9'
+  }
 });
