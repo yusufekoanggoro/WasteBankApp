@@ -3,7 +3,8 @@ import {
   View,
   TextInput,
   Button,
-  ScrollView
+  ScrollView,
+  Image
 } from 'react-native'
 import { Dialog, Text } from '@rneui/base';
 import Spinner from 'react-native-loading-spinner-overlay/lib';
@@ -39,6 +40,8 @@ const IncomingTransaction = ({ params, navigation }) => {
     {id: 2, jenisSampah: 'besi', harga: 1000}
   ]);
   const [berat, setBerat] = useState(0);
+  const [tunai, setTunai] = useState(0);
+  const [kembali, setKembali] = useState(0);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [modalSuccses, setModalSuccses] = useState(false);
@@ -77,6 +80,8 @@ const IncomingTransaction = ({ params, navigation }) => {
 
     tempSampah.push(sampah)
     setJumlahSampah(tempSampah)
+    setTunai(0)
+    setKembali(0)
   }
 
   const handleRemoveSampah = (itemId) => {
@@ -87,6 +92,9 @@ const IncomingTransaction = ({ params, navigation }) => {
         }),
       );
     }
+
+    setTunai(0)
+    setKembali(0)
   }
 
   const handleChangeSelect = (itemId, id) => {
@@ -108,9 +116,17 @@ const IncomingTransaction = ({ params, navigation }) => {
     );
   }
 
-  const handleChangeBerat = (itemId, berat) => {
-    console.log(berat)
+  const totalHarga = () => {
+    let totalHarga = 0;
 
+    jumlahSampah.map(item => {
+      totalHarga += parseInt(item.total);
+    })
+
+    return totalHarga;
+  }
+
+  const handleChangeBerat = (itemId, berat) => {
     setJumlahSampah(current =>
       current.map(obj => {
         if (obj.id === itemId) {
@@ -127,14 +143,11 @@ const IncomingTransaction = ({ params, navigation }) => {
     setBerat(berat)
   }
 
-  const totalHarga = () => {
-    let totalHarga = 0;
+  const handleChangeTunai = (tunai) => {
+    let kembalian = tunai - totalHarga();
 
-    jumlahSampah.map(item => {
-      totalHarga += parseInt(item.total);
-    })
-
-    return totalHarga;
+    setTunai(tunai)
+    setKembali(kembalian)
   }
 
   const handleModalSuccses = () => {
@@ -157,9 +170,11 @@ const IncomingTransaction = ({ params, navigation }) => {
       const payload = {
         "transactionId": transactionId,
         "datas": data,
-        "tunai": 100000,
+        "tunai": tunai,
         "type": route.name === 'IncomingTransaction' ? 'in' : 'out'
       }
+
+      console.log(payload)
       
       const response = await transaction.postTransaction(payload);
       
@@ -220,7 +235,12 @@ const IncomingTransaction = ({ params, navigation }) => {
 
       <View style={{ flex: 1, flexDirection: 'column' }}>
         {/* Logo */}
-        <View style={{ flex: 0.5, backgroundColor: '#FFFFFF' }} />
+        <View style={{ flex: 0.5, backgroundColor: '#FFFFFF', justifyContent: 'center', alignItems: 'center' }}>
+          <Image
+            style={{width: 100, height: 100}}
+            source={require('../../assets/logo_bank_sampah.png')}
+          />
+        </View>
 
         {/* Input Transaksi Masuk */}
         <View style={styles.wrapInputIncomingTransaction}>
@@ -296,6 +316,7 @@ const IncomingTransaction = ({ params, navigation }) => {
               </View>
 
               <View style={styles.wrapTextInput}>
+                <Text style={{ fontSize: 15, padding: 5, color: 'white' }}>Total Harga : </Text>
                 <TextInput
                     defaultValue={`RP. ${totalHarga()}`}
                     editable={false}
@@ -306,16 +327,21 @@ const IncomingTransaction = ({ params, navigation }) => {
               </View>
 
               <View style={styles.wrapTextInput}>
+                <Text style={{ fontSize: 15, padding: 5, color: 'white' }}>Tunai : </Text>
                 <TextInput
                     editable={true}
                     style={styles.input}
+                    keyboardType='numeric'
+                    onChangeText={(text) => handleChangeTunai(text)}
                     placeholder="Tunai"
                     placeholderTextColor="#ADADAD"
                 />
               </View>
 
               <View style={styles.wrapTextInput}>
+                <Text style={{ fontSize: 15, padding: 5, color: 'white' }}>Kembalian : </Text>
                 <TextInput
+                    defaultValue={`RP. ${kembali}`}
                     editable={false}
                     style={styles.input}
                     placeholder="Kembalian"
