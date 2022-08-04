@@ -15,33 +15,33 @@ const Home = ({ navigation }) => {
     <View style={styles.container}>
       <Header navigation={navigation} centerTitle="Home" />
       <ImageBackground source={require('../../assets/bg_bs.png')} style={styles.backgroundImage}>
-        <View style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap', padding: 50}}>
+        <View style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap', padding: 50, justifyContent: 'center', alignItems: 'center'}}>
           <TouchableOpacity 
             onPress={() => {
               navigation.navigate('WasteDataList')
             }}
-          style={{backgroundColor: '#00CC66',  width:'50%', height: 100, borderRadius: 20, justifyContent: 'center', alignItems: 'center'}}>
+          style={{backgroundColor: '#00CC66',  width:'40%', height: 100, borderRadius: 20, justifyContent: 'center', alignItems: 'center'}}>
             <FontAwesome5 name={'trash-alt'} size={70} />
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => {
               navigation.navigate('IncomingTransaction')
             }}
-            style={{backgroundColor: '#00CC66', width:'50%', height: 100, borderRadius: 20, justifyContent: 'center', alignItems: 'center'}}>
+            style={{backgroundColor: '#00CC66', width:'40%', height: 100, borderRadius: 20, justifyContent: 'center', alignItems: 'center'}}>
             <FontAwesome5 name={'receipt'} size={70} />
           </TouchableOpacity>
           <TouchableOpacity 
             onPress={() => {
               navigation.navigate('OutcomingTransaction')
             }}
-          style={{backgroundColor: '#00CC66', width:'50%', height: 100, borderRadius: 20, justifyContent: 'center', alignItems: 'center'}}>
+          style={{backgroundColor: '#00CC66', width:'40%', height: 100, borderRadius: 20, justifyContent: 'center', alignItems: 'center'}}>
             <FontAwesome5 name={'database'} size={70} />
           </TouchableOpacity>
           <TouchableOpacity 
             onPress={() => {
               navigation.navigate('Report')
             }}
-          style={{backgroundColor: '#00CC66', width:'50%', height: 100, borderRadius: 20, justifyContent: 'center', alignItems: 'center'}}>
+          style={{backgroundColor: '#00CC66', width:'40%', height: 100, borderRadius: 20, justifyContent: 'center', alignItems: 'center'}}>
             <FontAwesome5 name={'clipboard-list'} size={70} />
           </TouchableOpacity>
         </View>

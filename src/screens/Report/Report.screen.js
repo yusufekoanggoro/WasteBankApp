@@ -155,8 +155,8 @@ const Report = ({ navigation, buttonBack }) => {
             style={{ height: 40, width: 200, color: 'black'}}
             onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
           >
-            <Picker.Item label="Transakasi Masuk" value="in" />
-            <Picker.Item label="Transakasi Keluar" value="out" />
+            <Picker.Item label="Transaksi Masuk" value="in" />
+            <Picker.Item label="Transaksi Keluar" value="out" />
           </Picker>
         </View>
         <ScrollView>
