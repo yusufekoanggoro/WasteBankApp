@@ -1,4 +1,5 @@
 import * as React from 'react';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import { HomeScreen, ProfileScreen, WasteDataListScreen, InputWasteDataScreen, ReportScreen, IncomingTransactionScreen } from '../screens'
@@ -17,6 +18,9 @@ const DrawerNavigation =  ({token, role}) => {
                 <Drawer.Screen
                     options={{
                         // drawerActiveBackgroundColor: 'red',
+                        drawerIcon: ({color, size}) => (
+                            <FontAwesome5 name={'home'} size={size} color={color} />
+                        ),
                         drawerActiveTintColor:  '#000000',
                         headerStyle: {
                             backgroundColor: '#66CDAA'
@@ -27,6 +31,9 @@ const DrawerNavigation =  ({token, role}) => {
                 <Drawer.Screen 
                     options={{
                         // drawerActiveBackgroundColor: 'red',
+                        drawerIcon: ({color, size}) => (
+                            <FontAwesome5 name={'trash-alt'} size={size} color={color} />
+                        ),
                         drawerActiveTintColor:  '#000000',
                         headerStyle: {
                             backgroundColor: '#66CDAA'
@@ -36,6 +43,9 @@ const DrawerNavigation =  ({token, role}) => {
                 <Drawer.Screen 
                     options={{
                         // drawerActiveBackgroundColor: 'red',
+                        drawerIcon: ({color, size}) => (
+                            <FontAwesome5 name={'receipt'} size={size} color={color} />
+                        ),
                         drawerActiveTintColor:  '#000000',
                         headerStyle: {
                             backgroundColor: '#66CDAA'
@@ -46,6 +56,9 @@ const DrawerNavigation =  ({token, role}) => {
                 <Drawer.Screen 
                     options={{
                         // drawerActiveBackgroundColor: 'red',
+                        drawerIcon: ({color, size}) => (
+                            <FontAwesome5 name={'database'} size={size} color={color} />
+                        ),
                         drawerActiveTintColor:  '#000000',
                         headerStyle: {
                             backgroundColor: '#66CDAA'
@@ -57,6 +70,9 @@ const DrawerNavigation =  ({token, role}) => {
                         <Drawer.Screen 
                         options={{
                             // drawerActiveBackgroundColor: 'red',
+                            drawerIcon: ({color, size}) => (
+                                <FontAwesome5 name={'database'} size={size} color={color} />
+                            ),
                             drawerActiveTintColor:  '#000000',
                             headerStyle: {
                                 backgroundColor: '#66CDAA'

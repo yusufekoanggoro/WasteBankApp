@@ -8,7 +8,7 @@ import {
   StyleSheet,
   useWindowDimensions
 } from 'react-native';
- 
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5'
 import {
   DrawerContentScrollView,
   DrawerItemList,
@@ -56,6 +56,7 @@ const SideMenu = (props) => {
             <DrawerContentScrollView {...props}>
                 <DrawerItemList {...props}/>
                 <DrawerItem
+                            icon={(color, size) => <FontAwesome5 name={'arrow-right'} size={20} color={'gray'} />}
                             label="Logout"
                             onPress={async () => {
                                 await AsyncStorage.removeItem('accessToken');
