@@ -1,13 +1,36 @@
 import React from "react";
 import { createNativeStackNavigator } from  '@react-navigation/native-stack';
 import { HomeScreen, ProfileScreen, WasteDataListScreen, InputWasteDataScreen, IncomingTransactionScreen, LoginScreen, ReportScreen } from '../screens'
+import  DrawerNavigation from './DrawerNavigation'
 
 const Stack = createNativeStackNavigator();
+
+
+const DrawerWithStack = ({token, role}) => {
+  const Drawer = () => ( <DrawerNavigation token={token} role={role} /> );
+  return(
+    <Stack.Navigator initialRouteName="Root" screenOptions={{headerShown: false}}>
+      <Stack.Screen name="Root" component={Drawer} />
+      <Stack.Screen name="WasteDataList">
+        {props => <WasteDataListScreen {...props} buttonBack={true} />}
+      </Stack.Screen>
+      <Stack.Screen name="IncomingTransaction">
+        {props => <IncomingTransactionScreen {...props} buttonBack={true} />}
+      </Stack.Screen>
+      <Stack.Screen name="OutcomingTransaction">
+        {props => <IncomingTransactionScreen {...props} buttonBack={true} />}
+      </Stack.Screen>
+      <Stack.Screen name="Report">
+        {props => <ReportScreen {...props} buttonBack={true} />}
+      </Stack.Screen>
+    </Stack.Navigator>
+  )
+}
 
 const HomeStackNavigator = () => {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
-      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="HomeStack" component={HomeScreen} />
       <Stack.Screen name="InputWasteData" component={InputWasteDataScreen} />
     </Stack.Navigator>
   );
@@ -65,5 +88,6 @@ export {
   InTransactionNavigator, 
   OutTransactionNavigator, 
   AuthStackNavigator, 
-  ReportNavigator 
+  ReportNavigator,
+  DrawerWithStack
 };

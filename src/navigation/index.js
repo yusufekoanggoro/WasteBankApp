@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import DrawerNavigation from './DrawerNavigation'
-import { AuthStackNavigator } from './StackNavigator'
+import { AuthStackNavigator, DrawerWithStack } from './StackNavigator'
 import { NavigationContainer } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -12,9 +12,9 @@ const MainNavigation = () => {
     const checkToken = async () => {
         try {
           let findingToken = await AsyncStorage.getItem('accessToken');
-          setFoundToken(findingToken);
+          setFoundToken('findingToken');
           let roleUser = await AsyncStorage.getItem('roleUser');
-          setUserRole(roleUser)
+          setUserRole('roleUser')
         } catch (error) {
           console.log(error);
         }
@@ -26,7 +26,7 @@ const MainNavigation = () => {
     
     return (
         <NavigationContainer>
-            { (foundToken !== null ? (<DrawerNavigation token={checkToken} role={roleUser} />) : (<AuthStackNavigator token={checkToken} />)) }
+            { (foundToken !== null ? (<DrawerWithStack token={checkToken} role={roleUser} />) : (<AuthStackNavigator token={checkToken} />)) }
         </NavigationContainer>
     )
  }

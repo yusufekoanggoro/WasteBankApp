@@ -20,7 +20,7 @@ import transaction from '../../apis/transaction';
 import wasteService from '../../apis/wasteService';
 
 
-const IncomingTransaction = ({ params, navigation }) => {
+const IncomingTransaction = ({ params, navigation, buttonBack }) => {
   const route = useRoute();
   console.log(route.name)
   
@@ -201,7 +201,7 @@ const IncomingTransaction = ({ params, navigation }) => {
       
       {loading && <Spinner visible={loading} />}
       
-      <Header navigation={navigation} centerTitle={title} />
+      <Header navigation={navigation} centerTitle={title} buttonBack={buttonBack} />
 
       {/* <Text>{JSON.stringify(jumlahSampah)}</Text> */}
 

@@ -20,7 +20,7 @@ import CardReport from '../../components/CardReport';
 import { apiHost } from '../../envs/env.development';
 import reportService from '../../apis/reportService';
 
-const Report = ({ navigation }) => {
+const Report = ({ navigation, buttonBack }) => {
   const [selectedValue, setSelectedValue] = useState("in");
   const [dateFirst, setDateFirst] = useState(new Date())
   const [openDateFirst, setOpenDateFirst] = useState(false)
@@ -95,7 +95,7 @@ const Report = ({ navigation }) => {
 
   return (
     <>
-      <Header navigation={navigation} centerTitle="Laporan" />
+      <Header navigation={navigation} centerTitle="Laporan" buttonBack={buttonBack} />
 
       <DatePicker
         mode={'date'}

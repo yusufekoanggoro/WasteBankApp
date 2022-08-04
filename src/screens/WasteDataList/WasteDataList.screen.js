@@ -19,7 +19,7 @@ const wait = (timeout) => {
   return new Promise(resolve => setTimeout(resolve, timeout));
 }
 
-const WasteDataList = ({ navigation }) => {
+const WasteDataList = ({ navigation, buttonBack }) => {
   const [wasteData, setWasteData] = useState([]);
   const [wasteDataDetail, setWasteDataDetail] = useState({});
   const [isLoadingWaste, setIsLoadingWaste] = useState(false);
@@ -67,7 +67,7 @@ const WasteDataList = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Header navigation={navigation} centerTitle="Data Sampah" />
+      <Header navigation={navigation} centerTitle="Data Sampah" buttonBack={buttonBack} />
 
       <ModalProduct 
         visible={modalVisible} 
