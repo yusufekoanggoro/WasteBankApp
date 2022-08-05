@@ -12,9 +12,9 @@ const MainNavigation = () => {
     const checkToken = async () => {
         try {
           let findingToken = await AsyncStorage.getItem('accessToken');
-          setFoundToken('findingToken');
+          setFoundToken(findingToken);
           let roleUser = await AsyncStorage.getItem('roleUser');
-          setUserRole('roleUser')
+          setUserRole(roleUser)
         } catch (error) {
           console.log(error);
         }
