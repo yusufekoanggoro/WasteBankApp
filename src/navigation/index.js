@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import DrawerNavigation from './DrawerNavigation'
-import { AuthStackNavigator, DrawerWithStack } from './StackNavigator'
+import { AuthStackNavigator } from './StackNavigator'
 import { NavigationContainer } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -26,7 +26,7 @@ const MainNavigation = () => {
     
     return (
         <NavigationContainer>
-            { (foundToken !== null ? (<DrawerWithStack token={checkToken} role={roleUser} />) : (<AuthStackNavigator token={checkToken} />)) }
+            { (foundToken !== null ? (<DrawerNavigation token={checkToken} role={roleUser} />) : (<AuthStackNavigator token={checkToken} />)) }
         </NavigationContainer>
     )
  }

@@ -11,6 +11,17 @@ const DrawerWithStack = ({token, role}) => {
   return(
     <Stack.Navigator initialRouteName="Root" screenOptions={{headerShown: false}}>
       <Stack.Screen name="Root" component={Drawer} />
+    </Stack.Navigator>
+  )
+}
+
+const HomeStackNavigator = () => {
+  return (
+    <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Screen name="HomeStack" component={HomeScreen} />
+      <Stack.Screen name="InputWasteData">
+        {props => <InputWasteDataScreen {...props} buttonBack={true} />}
+      </Stack.Screen>
       <Stack.Screen name="WasteDataList">
         {props => <WasteDataListScreen {...props} buttonBack={true} />}
       </Stack.Screen>
@@ -23,15 +34,6 @@ const DrawerWithStack = ({token, role}) => {
       <Stack.Screen name="Report">
         {props => <ReportScreen {...props} buttonBack={true} />}
       </Stack.Screen>
-    </Stack.Navigator>
-  )
-}
-
-const HomeStackNavigator = () => {
-  return (
-    <Stack.Navigator screenOptions={{headerShown: false}}>
-      <Stack.Screen name="HomeStack" component={HomeScreen} />
-      <Stack.Screen name="InputWasteData" component={InputWasteDataScreen} />
     </Stack.Navigator>
   );
 }
