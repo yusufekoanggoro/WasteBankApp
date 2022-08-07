@@ -52,7 +52,7 @@ const IncomingTransaction = ({ params, navigation, buttonBack }) => {
   useEffect(() => {
     const getWaste = async () => {
       try {
-        const res = await wasteService.getWasteData();
+        const res = await wasteService.getWasteData(`&type=${route.name === 'IncomingTransaction' ? 'in' : 'out'}`);
         console.log(res.data)
 
         setWasteData(res.data);

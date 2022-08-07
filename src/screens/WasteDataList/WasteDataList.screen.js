@@ -92,12 +92,12 @@ const WasteDataList = ({ navigation, buttonBack }) => {
       
       {!isLoadingWaste && (
         <ScrollView style={styles.scrollView}
-        // refreshControl={
-        //   <RefreshControl
-        //     refreshing={refreshing}
-        //     onRefresh={onRefresh}
-        //   />
-        // }
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+          />
+        }
         >
           <View style={{
             flex: 1,
