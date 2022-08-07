@@ -52,7 +52,7 @@ const ModalProduct = (props) => {
                 fontFamily: 'Nunito-Regular',
                 fontWeight: '100',
                 fontSize: 18
-            }}>RP. {harga}/Kg</Text>
+            }}>RP. {harga}/KG</Text>
 
             <View style={{ marginTop: 10 }}>
               <Text h4 h4Style={{
