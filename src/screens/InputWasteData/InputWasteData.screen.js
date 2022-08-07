@@ -14,12 +14,15 @@ import Icon from 'react-native-vector-icons/AntDesign'
 import Header from '../../components/Header';
 import wasteService from '../../apis/wasteService';
 import Spinner from 'react-native-loading-spinner-overlay';
+import {Picker} from '@react-native-picker/picker';
+import { typesOfWaste } from '../../constants'
 
 const initialState = {
   jenisSampah: "",
   satuan: "",
   harga: 0,
-  deskripsi: ""
+  deskripsi: "",
+  type: ""
 };
 
 const InputWasteData = ({ navigation }) => {
@@ -27,7 +30,7 @@ const InputWasteData = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const [
-    { jenisSampah, satuan, harga, deskripsi },
+    { jenisSampah, satuan, harga, deskripsi, type },
     setState
   ] = useState(initialState);
 
@@ -60,26 +63,34 @@ const InputWasteData = ({ navigation }) => {
       setLoading(true)
       const formData = {
         jenisSampah,
-        satuan,
+        satuan: satuan.toUpperCase(),
         harga,
         deskripsi,
         gambar: {
           uri: fileResponse[0].uri,
           type: fileResponse[0].type, 
           name: fileResponse[0].name,
-        }
+        },type
       };
-      const res = await wasteService.postWasteData(formData);
-      console.log(res)
-      if(res.code === 201){
+      try {
+        const res = await wasteService.postWasteData(formData);
+        if(res.code === 201){
+          setLoading(false)
+          setFileResponse([])
+          clearState()
+          alert('Berhasil Input Data')
+        }
+      } catch (error) {
         setLoading(false)
-        setFileResponse([])
-        clearState()
-        alert('Berhasil Input Data')
+        alert('GAGAL')
       }
     }else{
       alert("Harus Upload data")
     }
+  }
+
+  const handleChangeSelect = (name, value) => {
+    setState((prevState) => ({ ...prevState, [name]: value }));
   }
 
   return (
@@ -220,6 +231,35 @@ const InputWasteData = ({ navigation }) => {
                       onChangeText={(text) => onChangeText('deskripsi', text)}
                   />
                 </View>
+            </View>
+
+            <View style={{
+                display: 'flex', 
+                flexDirection: 'column',
+                marginBottom: 20
+              }}>
+                <View style={{
+                  marginBottom: 5
+                }}>
+                  <Text style={{
+                    color: '#2E434D',
+                    fontSize: 16
+                  }}>Jenis</Text>
+                </View>
+
+                <View>
+                <Picker
+                    selectedValue={type}
+                    dropdownIconColor="black"
+                    style={{...styles.input, height: 64}}
+                    onValueChange={(itemValue, itemIndex) => handleChangeSelect('type', itemValue)}
+                  >
+                    {typesOfWaste.map(item => (
+                      <Picker.Item label={item.label} value={item.label} />
+                    ))}
+                  </Picker>
+                </View>
+
             </View>
 
             <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'flex-end'}}>
