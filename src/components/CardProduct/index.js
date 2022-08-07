@@ -12,7 +12,8 @@ const CardProduct = (props) => {
   const { 
     jenisSampah, 
     harga,
-    gambar
+    gambar,
+    type
   } = props.item;
 
   return (
@@ -29,12 +30,17 @@ const CardProduct = (props) => {
             </View>
             <Text numberOfLines={1} h4 h4Style={{
                 fontFamily: 'Nunito-Regular',
-                fontWeight: '100',
+                fontWeight: 'bold',
             }}>{jenisSampah}</Text>
+            <Text numberOfLines={1} h4 h4Style={{
+                fontFamily: 'Nunito-Regular',
+                fontWeight: 'bold',
+            }}>sampah {type === 'in' ? 'masuk' : 'keluar'}</Text>
             <Text h4 h4Style={{
                 fontFamily: 'Nunito-Regular',
                 fontWeight: '100',
-            }}>RP. {harga}/Kg</Text>
+                fontSize: 20
+            }}>RP. {harga}/KG</Text>
         </View>
     </TouchableOpacity>
   );
@@ -44,7 +50,7 @@ const styles = StyleSheet.create({
   container: {
     width: '50%', 
     backgroundColor: 'white', 
-    height: 250, 
+    height: 270, 
     padding: 5, 
     flexDirection: 'column',
     marginBottom: 5
