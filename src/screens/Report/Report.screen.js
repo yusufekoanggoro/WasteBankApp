@@ -82,7 +82,7 @@ const Report = ({ navigation, buttonBack }) => {
 
   const getDownloadReport = async () => {
     try {
-      const response = await reportService.getDownloadReport(`startDate=${dateFirst.toISOString().split('T')[0]}&endDate=${endDate.toISOString().split('T')[0]}&type=${selectedValue}`);
+      const response = await reportService.getDownloadReport(`startDate=2021&endDate=${endDate.toISOString().split('T')[0]}&type=${selectedValue}`);
       const data = response.data;
 
       if(response.code === 200) {

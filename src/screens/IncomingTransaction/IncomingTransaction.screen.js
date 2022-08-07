@@ -180,7 +180,18 @@ const IncomingTransaction = ({ params, navigation, buttonBack }) => {
       
       if(response.code === 201) {
         setLoading(false)
-        setBerat(0)
+        setJumlahSampah([
+          {
+            id: 1,
+            selectId: 1,
+            jenisSampah: '',
+            harga: 0,
+            berat: 0,
+            total: 0,
+          }
+        ])
+        setTunai(0)
+        setKembali(0)
         setFIle(response.data.fileName)
         handleModalSuccses()
       }
@@ -291,6 +302,7 @@ const IncomingTransaction = ({ params, navigation, buttonBack }) => {
                         style={styles.input}
                         placeholder="Berat"
                         placeholderTextColor="#ADADAD"
+                        value={item.berat}
                     />
                   </View>
                   <View style={styles.wrapTextInput}>
@@ -335,6 +347,7 @@ const IncomingTransaction = ({ params, navigation, buttonBack }) => {
                     onChangeText={(text) => handleChangeTunai(text)}
                     placeholder="Tunai"
                     placeholderTextColor="#ADADAD"
+                    value={tunai}
                 />
               </View>
 
