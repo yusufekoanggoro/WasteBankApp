@@ -3,9 +3,10 @@ import {
   View,
   StyleSheet,
   Modal,
-  TouchableOpacity
+  Image
 } from 'react-native'
 import { Text } from '@rneui/themed';
+import { apiHost } from '../../envs/env.development';
 
 const ModalProduct = (props) => {
   const {
@@ -14,7 +15,10 @@ const ModalProduct = (props) => {
 
   const {
     jenisSampah,
-    harga
+    harga,
+    gambar,
+    deskripsi,
+    type
   } = props.item;
  
   return (
@@ -26,22 +30,39 @@ const ModalProduct = (props) => {
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={{ textAlign: 'center' }} h4>
+            <Text style={{ textAlign: 'center' }} h3>
               Detail Produk
             </Text>
 
-            <View style={styles.image} />
+            <View style={styles.image}>
+              <Image
+                source={{uri: `${apiHost}/uploads/${gambar}`}}
+                style={{
+                  height: '100%',
+                  width: '100%'
+                }}
+              />
+            </View>
 
             <Text h4 h4Style={{
                 fontFamily: 'Nunito-Regular',
-                fontWeight: '100',
-            }}>{jenisSampah}</Text>
+                fontWeight: 'bold',
+            }}>{jenisSampah} - sampah {type === 'in' ? 'masuk' : 'keluar'}</Text>
             <Text h4 h4Style={{
                 fontFamily: 'Nunito-Regular',
                 fontWeight: '100',
-            }}>RP. {harga}/Kg</Text>
+                fontSize: 18
+            }}>RP. {harga}/KG</Text>
 
-            <View style={styles.wrapButtonCol}>
+            <View style={{ marginTop: 10 }}>
+              <Text h4 h4Style={{
+                  fontFamily: 'Nunito-Regular',
+                  fontWeight: 'bold',
+              }}>Deskripsi</Text>
+              <Text style={{ fontSize: 13 }}>{deskripsi}</Text>
+            </View>
+
+            {/* <View style={styles.wrapButtonCol}>
               <View style={styles.wrapButtonRow}>
                 <TouchableOpacity onPress={props.onPressIncomingTransaction} style={styles.wrapButton}>
                   <Text style={{ ...styles.button, backgroundColor: 'blue' }}>
@@ -54,7 +75,7 @@ const ModalProduct = (props) => {
                   </Text>
                 </TouchableOpacity>
               </View>
-            </View>
+            </View> */}
           </View>
         </View>
       </Modal>

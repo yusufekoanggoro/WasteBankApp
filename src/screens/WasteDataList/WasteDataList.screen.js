@@ -61,6 +61,7 @@ const WasteDataList = ({ navigation, buttonBack }) => {
   }
 
   const handleClickModal = (wasteDetail) => {
+    console.log(wasteDetail)
     setModalVisible(!modalVisible)
     setWasteDataDetail(wasteDetail)
   }
