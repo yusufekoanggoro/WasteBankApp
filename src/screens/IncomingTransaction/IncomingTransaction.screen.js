@@ -28,7 +28,7 @@ const IncomingTransaction = ({ params, navigation, buttonBack }) => {
   const [jumlahSampah, setJumlahSampah] = useState([
     {
       id: 1,
-      selectId: 1,
+      selectId: 0,
       jenisSampah: '',
       harga: 0,
       berat: 0,
@@ -69,7 +69,7 @@ const IncomingTransaction = ({ params, navigation, buttonBack }) => {
 
     const sampah = {
       id: idSampah,
-      selectId: 1,
+      selectId: 0,
       jenisSampah: '',
       harga: 0,
       berat: 0,
@@ -100,20 +100,22 @@ const IncomingTransaction = ({ params, navigation, buttonBack }) => {
   const handleChangeSelect = (itemId, id) => {
     const wasteDetail = wasteData.filter(item => item.id === id)[0];
 
-    setJumlahSampah(current =>
-      current.map(obj => {
-        if (obj.id === itemId) {
-          return {
-            ...obj, 
-            selectId: id,
-            jenisSampah: wasteDetail.jenisSampah,
-            harga: wasteDetail.harga
+    if (wasteDetail !== undefined) {
+      setJumlahSampah(current =>
+        current.map(obj => {
+          if (obj.id === itemId) {
+            return {
+              ...obj, 
+              selectId: id,
+              jenisSampah: wasteDetail.jenisSampah,
+              harga: wasteDetail.harga
+            }
           }
-        }
-
-        return obj;
-      }),
-    );
+  
+          return obj;
+        }),
+      );
+    }
   }
 
   const totalHarga = () => {
@@ -157,7 +159,6 @@ const IncomingTransaction = ({ params, navigation, buttonBack }) => {
   const handleSubmit = async () => {
     try {
       setLoading(true)
-
       let data = [];
 
       jumlahSampah.map(item => {
@@ -281,6 +282,7 @@ const IncomingTransaction = ({ params, navigation, buttonBack }) => {
                     style={{ height: 40, width: '100%', color: 'black', backgroundColor: '#FFF'}}
                     onValueChange={(itemValue, itemIndex) => handleChangeSelect(item.id, itemValue)}
                   >
+                    <Picker.Item label='Please select an option...' value='0' />
                     {wasteData.map(item => (
                       <Picker.Item label={item.jenisSampah} value={item.id} />
                     ))}
