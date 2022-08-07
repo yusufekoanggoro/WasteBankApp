@@ -22,8 +22,8 @@ const CardProduct = (props) => {
               <Image
                 source={{uri: `${apiHost}/uploads/${gambar}`}}
                 style={{
-                  height: 135,
-                  width: 155
+                  height: '100%',
+                  width: '100%'
                 }}
               />
             </View>
