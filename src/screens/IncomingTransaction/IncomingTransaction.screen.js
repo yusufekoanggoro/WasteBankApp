@@ -175,6 +175,7 @@ const IncomingTransaction = ({ params, navigation, buttonBack }) => {
         "type": route.name === 'IncomingTransaction' ? 'in' : 'out'
       }
 
+      // statement handle if tunai < kembalian
       if(tunai < totalHarga()){
         setLoading(false)
         alert('Uang anda tidak cukup');
