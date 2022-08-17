@@ -175,6 +175,10 @@ const IncomingTransaction = ({ params, navigation, buttonBack }) => {
         "type": route.name === 'IncomingTransaction' ? 'in' : 'out'
       }
 
+      if(tunai < totalHarga()){
+        alert('Uang anda tidak cukup');
+      }
+
       console.log(payload)
       
       const response = await transaction.postTransaction(payload);
