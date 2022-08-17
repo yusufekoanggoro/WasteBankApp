@@ -176,6 +176,7 @@ const IncomingTransaction = ({ params, navigation, buttonBack }) => {
       }
 
       if(tunai < totalHarga()){
+        setLoading(false)
         alert('Uang anda tidak cukup');
         return false;
       }

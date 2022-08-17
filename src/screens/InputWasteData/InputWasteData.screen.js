@@ -119,13 +119,13 @@ const InputWasteData = ({ navigation }) => {
                   <Text style={{
                     color: '#2E434D',
                     fontSize: 16
-                  }}>Jenis Sampah</Text>
+                  }}>Nama Sampah</Text>
                 </View>
                 <View>
                   <TextInput
                       value={jenisSampah}
                       style={styles.input}
-                      placeholder="Jenis Sampah"
+                      placeholder="Nama Sampah"
                       placeholderTextColor="#ADADAD"
                       onChangeText={(text) => onChangeText('jenisSampah', text)}
                   />

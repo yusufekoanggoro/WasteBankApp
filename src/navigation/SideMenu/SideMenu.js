@@ -49,7 +49,7 @@ const SideMenu = (props) => {
                     <Text style={{fontSize: 15, color: 'white'}}>Bank Sampah</Text>
                     </View>
                     <View style={{marginTop: 9}}>
-                <Text style={{fontSize: 15, color: 'white'}}>PT. Wiwin Mutiara</Text>
+                <Text style={{fontSize: 15, color: 'white'}}>PD. Wiwin Mutiara</Text>
                     </View>
                 </View>
             </View>
