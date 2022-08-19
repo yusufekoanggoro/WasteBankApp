@@ -9,6 +9,7 @@ import { HomeStackNavigator, WasteStackNavigator, InTransactionNavigator, OutTra
 const Drawer = createDrawerNavigator()
 
 const DrawerNavigation =  ({token, role}) => {
+    const homeStackNavigator = () => (<HomeStackNavigator role={role} />)
     return(
             <Drawer.Navigator 
                 initialRouteName="Home"
@@ -27,7 +28,7 @@ const DrawerNavigation =  ({token, role}) => {
                         }
                     }} 
                     
-                    name="Home" component={HomeStackNavigator} />
+                    name="Home" component={homeStackNavigator} />
                 <Drawer.Screen 
                     options={{
                         // drawerActiveBackgroundColor: 'red',

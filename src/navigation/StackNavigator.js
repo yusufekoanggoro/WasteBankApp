@@ -15,10 +15,12 @@ const DrawerWithStack = ({token, role}) => {
   )
 }
 
-const HomeStackNavigator = () => {
+const HomeStackNavigator = ({ role }) => {
   return (
     <Stack.Navigator screenOptions={{headerShown: false}}>
-      <Stack.Screen name="HomeStack" component={HomeScreen} />
+      <Stack.Screen name="HomeStack">
+        {props => <HomeScreen {...props} role={role} />}
+      </Stack.Screen>
       <Stack.Screen name="InputWasteData">
         {props => <InputWasteDataScreen {...props} buttonBack={true} />}
       </Stack.Screen>
